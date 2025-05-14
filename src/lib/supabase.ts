@@ -4,11 +4,12 @@ import { createClient } from '@supabase/supabase-js'
 let supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 let supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-// Fallback hardcoded credentials (only use in development as a fallback)
+// Check for missing environment variables
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Missing Supabase environment variables, using fallback credentials')
-  supabaseUrl = 'https://hvsvmxrktlmtywxwbwdd.supabase.co'
-  supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2c3ZteHJrdGxtdHl3eHdid2RkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwODc1ODIsImV4cCI6MjA2MjY2MzU4Mn0.9nwvTupvFoTJVWWtoXtNnQ-vj73vy1dx91uLjzChJ98'
+  console.error('Missing Supabase environment variables. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your .env.local file')
+  // Use empty strings as placeholders, the app will show appropriate errors
+  supabaseUrl = 'https://placeholder-url.supabase.co'
+  supabaseAnonKey = 'placeholder-key'
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey) 
